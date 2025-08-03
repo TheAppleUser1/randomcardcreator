@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>No CSS Cards</title>
+</head>
+<body>
+
+  <h2>Add a card</h2>
+  <input type="text" id="inputText" placeholder="Type something">
+  <button onclick="addCard()">Add</button>
+
+  <h3>Your cards</h3>
+  <select id="cardDropdown" onchange="showCard()">
+    <option value="">-- Select a card --</option>
+  </select>
+
+  <div id="cardDisplay"></div>
+
+  <script>
+    function addCard() {
+      const input = document.getElementById("inputText");
+      const text = input.value.trim();
+      if (text === "") return;
+
+      const option = document.createElement("option");
+      option.value = text;
+      option.text = text;
+      document.getElementById("cardDropdown").appendChild(option);
+
+      input.value = "";
+    }
+
+    function showCard() {
+      const selected = document.getElementById("cardDropdown").value;
+      const display = document.getElementById("cardDisplay");
+      display.innerHTML = "";
+
+      if (selected) {
+        const fieldset = document.createElement("fieldset");
+        const legend = document.createElement("legend");
+        legend.textContent = "Card";
+        fieldset.appendChild(legend);
+        fieldset.appendChild(document.createTextNode(selected));
+        display.appendChild(fieldset);
+      }
+    }
+  </script>
+
+</body>
+</html>
